@@ -1,0 +1,33 @@
+Инфо по cdc
+https://habr.com/ru/companies/yandex_cloud_and_infra/articles/754802/
+https://datafinder.ru/products/istoricheskiy-obzor-kak-cdc-instrumenty-i-podhody-razvivalis-na-praktike
+
+Debezium
+https://habr.com/ru/companies/lanit/articles/654259/
+https://spring.io/blog/2020/12/14/case-study-change-data-capture-cdc-analysis-with-cdc-debezium-source-and-analytics-sink-in-real-time
+
+WAL в PostgreSQL: 4. Настройка журнала
+https://habr.com/ru/companies/postgrespro/articles/461523/
+https://postgrespro.ru/docs/postgrespro/10/runtime-config-wal
+https://stackoverflow.com/questions/67490668/changing-wal-level-on-postgresql-13-via-client-session-is-not-being-respecte
+
+Kafka Connect на примере Debezium PostgresConnector
+https://habr.com/ru/articles/779620/
+
+Debezium + multiple tables PostgreSQL
+https://aiven.io/developer/cdc-multiple-postgresql-tables-logical-decoding
+
+Debezium + Java + PostgreSQL
+work 50/50 https://github.com/davidarchanjo/spring-boot-debezium-postgres/tree/master
+https://www.baeldung.com/debezium-intro
+
+MultiThreading
+- не рекомендуется делать больше 1го debezium коннектора на одной базе (https://groups.google.com/g/debezium/c/Xx_w1mZvuT8)
+    "You can safely run multiple connectors in the same Kafka Connect environment, that's not a problem. If you're referring
+to running multiple connectors against the same database, while that is technically possible as well, we do generally
+recommend you don't do that unless there is an absolute need for it.  More often than not, a single connector can easily
+perform the workload of many tables rather than trying to scale outward with multiple connectors."
+
+https://stackoverflow.com/questions/70504021/can-2-debezium-connectors-read-from-same-source-at-the-same-time
+https://stackoverflow.com/questions/67368304/is-debezium-sqlserver-connector-task-multi-threading?rq=3
+

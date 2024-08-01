@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.0" xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
+        http://java.sun.com/xml/ns/persistence/orm_2_0.xsd ">
+
+    <!--<named-native-query name="sql.SyncOrgStatistics.ClearTable">
+        <query>
+
+        </query>
+    </named-native-query>-->
+
+    <named-native-query name="sql.Customer.UpdateColumn">
+        <query>
+            CALL dbz.rebuild_shopping_tmp(:param);
+        </query>
+    </named-native-query>
+<!--
+    <named-native-query name="sql.SyncOrgStatistics.SelectCount">
+        <query>
+            SELECT COUNT(1) rowCount
+            FROM {h-schema}UFS_SYNC_ORG_STATISTICS
+        </query>
+    </named-native-query>-->
+
+</entity-mappings>

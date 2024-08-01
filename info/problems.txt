@@ -1,0 +1,26 @@
+@Configuration
+@EnableBatchProcessing
+@RequiredArgsConstructor
+public class BatchConfig {
+    private final JobBuilderFactory jobBuilderFactory;
+    private final StepBuilderFactory stepBuilderFactory;
+    private final EventService customerService;
+//    private final CustomerService customerService;
+//    САМАЯ БОЛЬШАЯ ПРОБЛЕМА:
+//    нужно придумать как
+
+/*Description:
+
+//The dependencies of some of the beans in the application context form a cycle:
+
+┌─────┐
+|  batchConfig defined in file [D:\ASTON\IntensiveProject\debezium-test\target\classes\ru\uoles\ex\config\BatchConfig.class]
+↑     ↓
+|  customerService defined in file [D:\ASTON\IntensiveProject\debezium-test\target\classes\ru\uoles\ex\service\CustomerService.class]
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+*/
