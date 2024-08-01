@@ -55,6 +55,7 @@ public class BatchConfig {
                 .incrementer(new RunIdIncrementer())
                 .start(flow())
                 .from(decider()).on("step1").to(step1())
+                //с такими же успехами проще вообще не использовать spring batch
                 .next(step2())
                 .next(step3())
                 .from(decider()).on("step2").to(step2())
