@@ -1,6 +1,7 @@
 package com.example.testdebeziumpr.config;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -19,6 +20,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableBatchProcessing
 @RequiredArgsConstructor
+@Slf4j
 public class BatchConfig {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
@@ -36,17 +38,6 @@ public class BatchConfig {
                 .build();
     }
 
-    /*@Bean
-    public Job job() {
-        return jobBuilderFactory.get("job")
-                .incrementer(new RunIdIncrementer())
-                .start(flow()) // Используем flow
-                .from(decider()).on("step1").to(step1())
-                .from(decider()).on("step2").to(step2())
-                .from(decider()).on("step3").to(step3())
-                .end()
-                .build();
-    }*/
     @Bean
     public Job job() {
 
@@ -70,16 +61,16 @@ public class BatchConfig {
     public JobExecutionDecider decider() {
         return (jobExecution, stepExecution) -> {
             String startStep = jobExecution.getJobParameters().getString("startStep");
-//            logger.info("Decider: startStep = {}", startStep);
+            log.info("Decider: startStep = {}", startStep);
 
             if ("step2".equals(startStep)) {
-                System.out.println("Decider: starting from step2");
+                log.info("Decider: starting from step2");
                 return new FlowExecutionStatus("step2");
             } else if ("step3".equals(startStep)) {
-                System.out.println("Decider: starting from step3");
+                log.info("Decider: starting from step3");
                 return new FlowExecutionStatus("step3");
             } else {
-                System.out.println("Decider: starting from step1 (default)");
+                log.info("Decider: starting from step1 (default)");
                 return new FlowExecutionStatus("step1");
             }
         };
@@ -89,7 +80,7 @@ public class BatchConfig {
     public Step step1() {
         return stepBuilderFactory.get("step1")
                 .tasklet((contribution, chunkContext) -> {
-                    System.out.println("Step 1");
+                    log.info("Step 1");
                     return RepeatStatus.FINISHED;
                 })
                 .build();
@@ -99,7 +90,7 @@ public class BatchConfig {
     public Step step2() {
         return stepBuilderFactory.get("step2")
                 .tasklet((contribution, chunkContext) -> {
-                    System.out.println("Step 2");
+                    log.info("Step 2");
 //                    customerService.getMessage();
                     return RepeatStatus.FINISHED;
                 })
@@ -110,7 +101,7 @@ public class BatchConfig {
     public Step step3() {
         return stepBuilderFactory.get("step3")
                 .tasklet((contribution, chunkContext) -> {
-                    System.out.println("Step 3");
+                    log.info("Step 3");
                     return RepeatStatus.FINISHED;
                 })
                 .build();
